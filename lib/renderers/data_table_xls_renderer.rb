@@ -14,18 +14,17 @@ module Devextreme
 
     new_params = params.merge(
       'filterOptions' => options.dig(:columns_layout, 'filterOptions'),
-      'sortOptions' => options.dig(:columns_layout, 'sortOptions')
+      'sortOptions'   => options.dig(:columns_layout, 'sortOptions')
     )
 
     send_data(
       model.to_xls(view_context, new_params, options),
-      :type => :xls,
+      :type        => :xls,
       :disposition => "attachment; filename=#{filename}.xls"
     )
   end
 
   class DataTableXlsGenerator
-
     def initialize(data_table, view_context, query, options = {})
       @data_table = data_table
       @view_context = view_context
@@ -41,38 +40,38 @@ module Devextreme
     private
 
     def append_xls
-      header_font_fill = @options.dig(:styles,:header,:font_fill) || '#ffffff'
-      header_font_color = @options.dig(:styles,:header,:font_color) || '#000000'
+      header_font_fill = @options.dig(:styles, :header, :font_fill) || '#ffffff'
+      header_font_color = @options.dig(:styles, :header, :font_color) || '#000000'
 
-      output = <<-XML
-<?xml version="1.0" encoding="UTF-8"?>
-<Workbook xmlns:x="urn:schemas-microsoft-com:office:excel"
-          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
-          xmlns:html="http://www.w3.org/TR/REC-html40"
-          xmlns="urn:schemas-microsoft-com:office:spreadsheet"
-          xmlns:o="urn:schemas-microsoft-com:office:office">
-        <Styles>
-          <Style ss:ID="Default" ss:Name="Normal">
-           <Alignment ss:Vertical="Bottom"/>
-           <Borders/>
-           <Font/>
-           <Interior/>
-           <NumberFormat/>
-           <Protection/>
-          </Style>
-          <Style ss:ID="s1">
-           <Borders>
-            <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
-            <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
-            <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
-            <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
-           </Borders>
-           <Font x:Family="Swiss" ss:Bold="1" ss:Color="#{header_font_color}"/>
-           <Interior ss:Color="#{header_font_fill}" ss:Pattern="Solid"/>
-          </Style>
-         </Styles>
-  <Worksheet ss:Name="Sheet1">
-    <Table>
+      output = <<~XML
+        <?xml version="1.0" encoding="UTF-8"?>
+        <Workbook xmlns:x="urn:schemas-microsoft-com:office:excel"
+                  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+                  xmlns:html="http://www.w3.org/TR/REC-html40"
+                  xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+                  xmlns:o="urn:schemas-microsoft-com:office:office">
+                <Styles>
+                  <Style ss:ID="Default" ss:Name="Normal">
+                   <Alignment ss:Vertical="Bottom"/>
+                   <Borders/>
+                   <Font/>
+                   <Interior/>
+                   <NumberFormat/>
+                   <Protection/>
+                  </Style>
+                  <Style ss:ID="s1">
+                   <Borders>
+                    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+                    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+                    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+                    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+                   </Borders>
+                   <Font x:Family="Swiss" ss:Bold="1" ss:Color="#{header_font_color}"/>
+                   <Interior ss:Color="#{header_font_fill}" ss:Pattern="Solid"/>
+                  </Style>
+                 </Styles>
+          <Worksheet ss:Name="Sheet1">
+            <Table>
       XML
 
       if @summary && @summary.count > 0
@@ -90,7 +89,7 @@ module Devextreme
 
       if columns.present?
         @data_table.columns.each do |column|
-          user_column = columns.detect{|c| c['dataField'].split('.').last == column.name.to_s} || {'visible' => false}
+          user_column = columns.detect { |c| c['dataField'].split('.').last == column.name.to_s } || { 'visible' => false }
           # Call reverse_merge! on column to not override explicit options already set for the column
           column.options.reverse_merge!(:user_visible => user_column['visible'], :user_visible_index => user_column['visibleIndex'])
         end
@@ -123,8 +122,8 @@ module Devextreme
     # sypported ss:Type are ->  Number, DateTime, Boolean, String, and Error
     def resolve_type(value)
       return 'Number' if value.is_a?(Float)
+
       return 'String'
     end
-
   end
 end
