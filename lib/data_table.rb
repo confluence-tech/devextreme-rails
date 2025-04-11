@@ -1,6 +1,5 @@
 module Devextreme
   module DataTable
-
     # See documentation of the Data Grid
     #  http://js.devexpress.com/Documentation/ApiReference/UI_Widgets/dxDataGrid
 
@@ -17,7 +16,6 @@ module Devextreme
     end
 
     class Base
-
       attr_reader :columns,
                   :method,
                   :options,
@@ -41,103 +39,103 @@ module Devextreme
         @t_scope = self.class.name.gsub('DataTable', '').demodulize.underscore.to_sym
 
         @options = {
-          :scrolling => {
-            :mode => 'virtual',
-            :preloadEnabled => false,
-            :use_native => false,
+          :scrolling                     => {
+            :mode            => 'virtual',
+            :preloadEnabled  => false,
+            :use_native      => false,
             :scrollByContent => false
           },
-          :remoteOperations => {
+          :remoteOperations              => {
             :groupPaging => true,
-            :grouping => false,
-            :filtering => true,
-            :sorting => true,
-            :paging => true
+            :grouping    => false,
+            :filtering   => true,
+            :sorting     => true,
+            :paging      => true
           },
-          :hover_state_enabled => false,
-          :header_filter => {
+          :hover_state_enabled           => false,
+          :header_filter                 => {
             :visible => false,
           },
-          :filter_row => {
-            :visible => false,
+          :filter_row                    => {
+            :visible                => false,
             :show_operation_chooser => true
           },
-          :filter_panel => {
+          :filter_panel                  => {
             :visible => false
           },
-          :filter_sync_enabled => false, # Used to sync the filter row and the filter builder,
-          :search_panel => {
+          :filter_sync_enabled           => false, # Used to sync the filter row and the filter builder,
+          :search_panel                  => {
             :visible => false
           },
-          :allow_column_reordering => true,
-          :allow_column_resizing => true,
-          :grouping => {
+          :allow_column_reordering       => true,
+          :allow_column_resizing         => true,
+          :grouping                      => {
             :group_continued_message => I18n.translate(:group_continued_message, :scope => [:data_tables, :shared]),
             :group_continues_message => I18n.translate(:group_continues_message, :scope => [:data_tables, :shared])
           },
-          :group_panel => {
-            :emptyPanelText => I18n.translate(:group_panel, :scope => [:data_tables, :shared]),
+          :group_panel                   => {
+            :emptyPanelText        => I18n.translate(:group_panel, :scope => [:data_tables, :shared]),
             :allow_column_dragging => true,
-            :visible => false
+            :visible               => false
           },
-          :row_alternation_enabled => true,
-          :no_data_text => I18n.translate(:none_found, :scope => [:data_tables, @t_scope]),
-          :show_column_lines => true,
-          :show_row_lines => false,
-          :sorting => {
-            :mode => 'multiple',
+          :row_alternation_enabled       => true,
+          :no_data_text                  => I18n.translate(:none_found, :scope => [:data_tables, @t_scope]),
+          :show_column_lines             => true,
+          :show_row_lines                => false,
+          :sorting                       => {
+            :mode           => 'multiple',
             :descendingText => I18n.translate(:descending_text, :scope => [:data_tables, :shared]),
-            :ascendingText => I18n.translate(:ascending_text, :scope => [:data_tables, :shared]),
-            :clearText => I18n.translate(:clear_text, :scope => [:data_tables, :shared])
+            :ascendingText  => I18n.translate(:ascending_text, :scope => [:data_tables, :shared]),
+            :clearText      => I18n.translate(:clear_text, :scope => [:data_tables, :shared])
           },
-          :loadPanel => {
-            :enabled => true,
+          :loadPanel                     => {
+            :enabled       => true,
             :showIndicator => true,
-            :showPane => true
+            :showPane      => true
           },
-          :columnAutoWidth => true,
-          :wordWrapEnabled => false,
+          :columnAutoWidth               => true,
+          :wordWrapEnabled               => false,
           :requireTotalRowCountIndicator => true,
-          :columnFixing => {
+          :columnFixing                  => {
             :enabled => false
           },
-          :selection => {
-            :mode => 'multiple',
-            :allow_select_all => false,
+          :selection                     => {
+            :mode                  => 'multiple',
+            :allow_select_all      => false,
             :show_check_boxes_mode => 'onClick',
-            :select_all_mode => 'page'
+            :select_all_mode       => 'page'
           },
-          :state_storing => {
+          :state_storing                 => {
             :ignore_column_option_names => [],
-            :enabled => true,
-            :saving_timeout => 500,
-            :type => 'custom'
+            :enabled                    => true,
+            :saving_timeout             => 500,
+            :type                       => 'custom'
           },
           #
           # DO NOT EVER REMOVE!!!!
           # This stops the grid from reloading twice.
           #
-          :paging => {
-            :pageSize => 25 #AppConfig.small_page_size
+          :paging                        => {
+            :pageSize => 25 # AppConfig.small_page_size
           },
-          :download => {
-            :visible => true,
+          :download                      => {
+            :visible     => true,
             :csv_visible => true,
             :xls_visible => true
           },
-          :internal_master_detail => {
+          :internal_master_detail        => {
             :apply_default_state_on_reset => true,
-            :disable_repaint => false
+            :disable_repaint              => false
           },
           # This setting preserves the selected rows when the grid is reset such as when the user navigates between level 1 and level 2 grids.
-          :preserve_selected_rows => false
+          :preserve_selected_rows        => false
 
         }
 
         @data_options = {
-          :controller_name => proc { |vc| vc.controller_name },
-          :action_name => proc { |vc| vc.action_name },
-          :grid_name => self.class.name,
+          :controller_name  => proc { |vc| vc.controller_name },
+          :action_name      => proc { |vc| vc.action_name },
+          :grid_name        => self.class.name,
           :reset_layout_url => proc { |vc| vc.user_grid_layouts_reset_layout_path }
         }
         @actions = []
@@ -168,7 +166,7 @@ module Devextreme
         builder = ColumnBuilder.new(@t_scope)
         yield builder if block_given?
 
-        if builder.columns.select{ |col| col.name == :id}.empty?
+        if builder.columns.select { |col| col.name == :id }.empty?
           builder.columns << ColumnInteger.new(:id, @t_scope, :visible => false, :showInColumnChooser => false, :downloadable => false, :user_visible => false)
         end
 
@@ -177,7 +175,7 @@ module Devextreme
           if column.options.fetch(:calculate_sort_value, false) == true
             new_column = column.is_a?(DataTable::ColumnTimeago) ? DataTable::ColumnText.new(column.name, @t_scope, DataTableFormatters.format_hidden.merge(:data_type => 'datetime')) : column.dup
             new_column.instance_variable_set(:@name, "#{new_column.name}_calculate_sort_value".to_sym)
-            new_column.instance_variable_set(:@params, {:link_to => nil, :link_to_content => nil, :new_tab => nil, :cell_css_class => nil, :remote => nil})
+            new_column.instance_variable_set(:@params, { :link_to => nil, :link_to_content => nil, :new_tab => nil, :cell_css_class => nil, :remote => nil })
             if column.is_a?(DataTable::ColumnTimeago)
               new_column.instance_variable_set(:@value, proc { |i, vc| i.send(column.name).strftime("%Y/%m/%d/ %k:%M:%S") })
             else
@@ -191,7 +189,7 @@ module Devextreme
           end
 
           if column.cell_css_class.present?
-            new_column = ColumnText.new("#{column.name}_cell_css_class".to_sym, @t_scope, {:visible => false, :showInColumnChooser => false, :downloadable => false, :user_visible => false, :caption => "#{column.name}_cell_css_class"}, column.cell_css_class.dup)
+            new_column = ColumnText.new("#{column.name}_cell_css_class".to_sym, @t_scope, { :visible => false, :showInColumnChooser => false, :downloadable => false, :user_visible => false, :caption => "#{column.name}_cell_css_class" }, column.cell_css_class.dup)
 
             builder.columns << new_column
           end
@@ -217,11 +215,11 @@ module Devextreme
             #   tables[object.name] ||= object
             #   tables[object.table_alias] ||= object if object.table_alias
             # end
-            tables[object.name] ||= {:arel_table => object, :arel_klass => @base_query.klass}
-            tables[object.table_alias] ||= {:arel_table => object, :arel_klass => @base_query.klass} if object.table_alias
+            tables[object.name] ||= { :arel_table => object, :arel_klass => @base_query.klass }
+            tables[object.table_alias] ||= { :arel_table => object, :arel_klass => @base_query.klass } if object.table_alias
           end
 
-          unique_projections = arel.projections.select {|p|
+          unique_projections = arel.projections.select { |p|
             p.is_a?(Arel::Attributes::Attribute)
           }.collect(&:relation).uniq(&:name)
 
@@ -245,6 +243,7 @@ module Devextreme
       # joiners
       # where's
       attr_accessor :sorted_and_filtered_query
+
       def query!(params)
         @sorted_and_filtered_query = @base_query.arel.dup # convert to AREL
         apply_grouping!(params)
@@ -265,7 +264,6 @@ module Devextreme
         @sorted_and_filtered_query.orders.clear
 
         sort_params.each do |sorter|
-
           order_desc = sorter['desc'] == true
           table, attribute, assoc_attribute = sorter['selector'].split('.')
 
@@ -273,7 +271,6 @@ module Devextreme
           next unless arel_col
 
           @sorted_and_filtered_query = @sorted_and_filtered_query.order(order_desc ? arel_col.desc : arel_col.asc)
-
         end
       end
 
@@ -289,7 +286,6 @@ module Devextreme
         @sorted_and_filtered_query.projections.clear
 
         group_params.each do |grouper|
-
           table, attribute, assoc_attribute = grouper['selector'].split('.')
 
           arel_col = get_arel_column(table, attribute, assoc_attribute)
@@ -297,7 +293,6 @@ module Devextreme
 
           @sorted_and_filtered_query = @sorted_and_filtered_query.group(arel_col)
           @sorted_and_filtered_query = @sorted_and_filtered_query.project(arel_col)
-
         end
       end
 
@@ -330,7 +325,7 @@ module Devextreme
           #   total_asset_series.currency.code
           #
 
-          associations = arel_klass.reflect_on_all_associations(:belongs_to).inject({}) {|list, assoc|
+          associations = arel_klass.reflect_on_all_associations(:belongs_to).inject({}) { |list, assoc|
             list[assoc.name.to_s] = assoc
             list
           }
@@ -352,15 +347,16 @@ module Devextreme
             # table already joined in base query?
             includes_table = @sorted_and_filtered_query.join_sources.any? do |join|
               join.left.name == assoc_arel_table.name ||
-                  join.right.each {|object|
-                    object.is_a?(Arel::Table) && object.name == assoc_arel_table.name
-                  }
+                join.right.each { |object|
+                  object.is_a?(Arel::Table) && object.name == assoc_arel_table.name
+                }
             end
 
             unless includes_table
               @sorted_and_filtered_query = @sorted_and_filtered_query.join(assoc_arel_table)
-                          .on(arel_table[association.foreign_key].eq(
-                              assoc_arel_table[association.association_primary_key]))
+                                             .on(arel_table[association.foreign_key].eq(
+                                                   assoc_arel_table[association.association_primary_key]
+                                                 ))
             end
 
             if assoc_arel_engine.columns.collect(&:name).include?(assoc_attribute)
@@ -422,7 +418,6 @@ module Devextreme
         unary_condition = filters.shift if filters.dimension > 1 && filters.first&.is_a?(String)
 
         filters.each_slice(2).each do |filter, condition|
-
           if filter.dimension > 1
             conditions_set = build_filter_conditions(filter)
 
@@ -461,7 +456,6 @@ module Devextreme
               conditions = conditions_set
             end
           end
-
         end
 
         conditions
@@ -555,34 +549,34 @@ module Devextreme
         end
 
         operation = case operator
-                      when "="
-                        arel_col.eq(expr)
-                      when "<>"
-                        arel_col.not_eq(expr)
-                      when "<"
-                        expr = expr.beginning_of_day if is_date_column
-                        arel_col.lt(expr)
-                      when ">"
-                        expr = expr.beginning_of_day if is_date_column
-                        arel_col.gt(expr)
-                      when "<="
-                        expr = expr.beginning_of_day if is_date_column
-                        arel_col.lteq(expr)
-                      when ">="
-                        expr = expr.beginning_of_day if is_date_column
-                        arel_col.gteq(expr)
-                      when "contains"
-                        arel_col.matches("%#{expr}%", nil, true)
-                      when "notcontains"
-                        arel_col.does_not_match("%#{expr}%", nil, true)
-                      when "startswith"
-                        arel_col.matches("#{expr}%", nil, true)
-                      when "endswith"
-                        arel_col.matches("%#{expr}", nil, true)
-                      when "between"
-                        arel_col.between(expr)
-                      else
-                        raise ArgumentError, "Unsupported operator #{operator}."
+                    when "="
+                      arel_col.eq(expr)
+                    when "<>"
+                      arel_col.not_eq(expr)
+                    when "<"
+                      expr = expr.beginning_of_day if is_date_column
+                      arel_col.lt(expr)
+                    when ">"
+                      expr = expr.beginning_of_day if is_date_column
+                      arel_col.gt(expr)
+                    when "<="
+                      expr = expr.beginning_of_day if is_date_column
+                      arel_col.lteq(expr)
+                    when ">="
+                      expr = expr.beginning_of_day if is_date_column
+                      arel_col.gteq(expr)
+                    when "contains"
+                      arel_col.matches("%#{expr}%", nil, true)
+                    when "notcontains"
+                      arel_col.does_not_match("%#{expr}%", nil, true)
+                    when "startswith"
+                      arel_col.matches("#{expr}%", nil, true)
+                    when "endswith"
+                      arel_col.matches("%#{expr}", nil, true)
+                    when "between"
+                      arel_col.between(expr)
+                    else
+                      raise ArgumentError, "Unsupported operator #{operator}."
                     end
         if operation
           conditions << operation
@@ -601,11 +595,11 @@ module Devextreme
       end
 
       def action_builder(name, &block)
-        @actions << {:name => name, :builder => block}
+        @actions << { :name => name, :builder => block }
       end
 
       def label_decorator(name, &block)
-        @label_decorators << {:name => name, :decorator => block}
+        @label_decorators << { :name => name, :decorator => block }
       end
 
       def action(name, image, extra = nil, value = nil, visible_lambda = nil)
@@ -614,10 +608,10 @@ module Devextreme
         method = extra.fetch(:method, :get)
         remote = extra.fetch(:remote, nil)
         onclick = extra.fetch(:onclick, nil)
-        css_class  = extra.fetch(:class, nil)
+        css_class = extra.fetch(:class, nil)
         translation_params = extra.fetch(:translation_params, {})
-        title = I18n.translate(name, **{:scope => [:data_tables, :actions]}.merge(translation_params))
-        data = {:method => method} unless method == :none
+        title = I18n.translate(name, **{ :scope => [:data_tables, :actions] }.merge(translation_params))
+        data = { :method => method } unless method == :none
         data[:remote] = true if remote
 
         if method == :delete || extra[:confirm] == true
@@ -627,14 +621,14 @@ module Devextreme
         end
 
         @actions << {
-          :name => name,
-          :image => image,
-          :value => value,
-          :title => title,
-          :data => data,
-          :css_class => css_class,
+          :name           => name,
+          :image          => image,
+          :value          => value,
+          :title          => title,
+          :data           => data,
+          :css_class      => css_class,
           :visible_lambda => visible_lambda,
-          :onclick => onclick
+          :onclick        => onclick
         }
       end
 
@@ -653,11 +647,11 @@ module Devextreme
       end
 
       def add_delete_action(path = nil, *parents)
-        action :delete, :times, {:method => :delete}, proc { |instance, view_context| path ? view_context.send(path, *parents, instance) : view_context.url_for(:controller => view_context.controller_name, :action => :destroy, :id => instance.to_param) }
+        action :delete, :times, { :method => :delete }, proc { |instance, view_context| path ? view_context.send(path, *parents, instance) : view_context.url_for(:controller => view_context.controller_name, :action => :destroy, :id => instance.to_param) }
       end
 
       def add_impact_action
-        action :impact, :sitemap, { :method => :post, :remote => true}, proc { |instance, view_context| view_context.impacts_for_impact_management_index_path(:entity_id => instance.id, :entity_type =>instance.model_name.name) }
+        action :impact, :sitemap, { :method => :post, :remote => true }, proc { |instance, view_context| view_context.impacts_for_impact_management_index_path(:entity_id => instance.id, :entity_type => instance.model_name.name) }
       end
 
       def add_lock_unlock_action
@@ -665,12 +659,12 @@ module Devextreme
           if instance.locked?
             action[:name]  = :unlock
             action[:image] = :unlock
-            action[:data] = {:method => :put, :remote => true}
+            action[:data] = { :method => :put, :remote => true }
             action[:value] = proc { |i, vc| vc.url_for(:action => :unlock, :controller => vc.controller_name, :id => i.id) }
           else
             action[:name]  = :lock
             action[:image] = :lock
-            action[:data] = {:method => :put, :remote => true}
+            action[:data] = { :method => :put, :remote => true }
             action[:value] = proc { |i, vc| vc.url_for(:action => :lock, :controller => vc.controller_name, :id => i.id) }
           end
           action
@@ -700,7 +694,7 @@ module Devextreme
         @header_filter_url = url_path
       end
 
-      def url(view_context, options={})
+      def url(view_context, options = {})
         # return what was provided to source_path
         is_master_detail = options.delete(:is_master_detail) || false
         return @url if @url && !is_master_detail
@@ -713,7 +707,7 @@ module Devextreme
         end
       end
 
-      def header_filter_url(view_context, options={})
+      def header_filter_url(view_context, options = {})
         # return what was provided to header_filter_source_path
         return @header_filter_url if @header_filter_url
 
@@ -739,18 +733,18 @@ module Devextreme
 
       def action_column
         col_data = {
-          :data_field => '_actions',
-          :data_type => 'string',
-          :width => 64, #41.66 * self.actions.length,
-          :caption => '',
-          :cell_template => :column_template_actions,
-          :allowFixing => false,
-          :allowResizing => false,
-          :allowHiding => false,
-          :allowReordering  => false
+          :data_field      => '_actions',
+          :data_type       => 'string',
+          :width           => 64, # 41.66 * self.actions.length,
+          :caption         => '',
+          :cell_template   => :column_template_actions,
+          :allowFixing     => false,
+          :allowResizing   => false,
+          :allowHiding     => false,
+          :allowReordering => false
         }.merge(DataTableFormatters.filter_sort_disable)
 
-        col_data.merge!({:fixed => true, :fixedPosition => 'left'}) if options.fetch(:fixed_actions, true)
+        col_data.merge!({ :fixed => true, :fixedPosition => 'left' }) if options.fetch(:fixed_actions, true)
 
         col_data
       end
@@ -776,7 +770,7 @@ module Devextreme
         # else
         #   default
         if column_selector.present?
-          request_column = self.columns.detect{ |c| c.name == column_selector }
+          request_column = self.columns.detect { |c| c.name == column_selector }
           Jbuilder.encode do |json|
             json.items(resultset) do |instance|
               value = request_column.text(instance, view_context) rescue nil
@@ -785,9 +779,7 @@ module Devextreme
           end
         else
           Jbuilder.encode do |json|
-
             json.items(resultset) do |instance|
-
               json.set!(@base_query.table_name) do
                 self.columns.each do |c|
                   value = c.value(instance, view_context) rescue nil
@@ -806,9 +798,9 @@ module Devextreme
                   end
 
                   json.set! '_highlight_row', {
-                    :highlight_row_class =>  highlights_to_set[:class],
-                    :highlight_row => highlights_to_set[:callback] }.to_json if highlights_to_set
-
+                    :highlight_row_class => highlights_to_set[:class],
+                    :highlight_row       => highlights_to_set[:callback]
+                  }.to_json if highlights_to_set
                 end
               end
 
@@ -870,8 +862,8 @@ module Devextreme
                         # Activerecord will add the default scope back for STI models
                         sql = @base_query.model.base_class.unscoped.from(
                           @base_query.arel_table.create_table_alias(
-                            count_query.project(Arel.star.count.as('row_count')
-                            ), @base_query.model.base_class.table_name)
+                            count_query.project(Arel.star.count.as('row_count')), @base_query.model.base_class.table_name
+                          )
                         ).to_sql
 
                         @base_query.model.connection.exec_query(sql).first['row_count']
@@ -945,8 +937,8 @@ module Devextreme
 
       def each_header
         @columns
-          .select {|column| column.options.fetch(:user_visible, true) == true}
-          .sort_by {|column| column.options[:user_visible_index]}
+          .select { |column| column.options.fetch(:user_visible, true) == true }
+          .sort_by { |column| column.options[:user_visible_index] }
           .collect(&:caption)
       end
 
@@ -960,9 +952,9 @@ module Devextreme
 
       def each_row(instance, view_context, method_call)
         @columns
-          .select{ |column| column.options.fetch(:user_visible, true) == true }
-          .sort_by{ |column| column.options[:user_visible_index] }
-          .collect{ |column| column.send(method_call, instance, view_context) rescue nil }
+          .select { |column| column.options.fetch(:user_visible, true) == true }
+          .sort_by { |column| column.options[:user_visible_index] }
+          .collect { |column| column.send(method_call, instance, view_context) rescue nil }
       end
 
       private
@@ -974,11 +966,9 @@ module Devextreme
       def parameter_binding_character
         is_connection_sql_server? ? /[\$@].+/ : /\$.+/
       end
-
     end
 
     class Column
-
       attr_reader :name,
                   :caption,
                   :options,
@@ -1085,10 +1075,10 @@ module Devextreme
 
       def extra_link_formatting(instance, view_context, text)
         if link_to?
-          text = {:href => @params[:link_to].call(instance, view_context), :text => text, :'data_remote' => remote?, :value => text}
+          text = { :href => @params[:link_to].call(instance, view_context), :text => text, :'data_remote' => remote?, :value => text }
           text.merge!(:target => '_blank') if @params[:new_tab]
         elsif link_to_content?
-          text = {:content => @params[:link_to_content].call(instance, view_context), :text => text, :value => text}
+          text = { :content => @params[:link_to_content].call(instance, view_context), :text => text, :value => text }
         end
         text
       end
@@ -1109,7 +1099,7 @@ module Devextreme
         unless @caption.is_a?(String)
           translation_params = @options.delete(:translation_params) || {}
           @caption = @name.first if @name.is_a? Array
-          @caption = I18n.t(:"#{@t_scope}.#{@caption}", **{scope: :data_tables, default: [:"common.#{@caption}"]}.merge(translation_params))
+          @caption = I18n.t(:"#{@t_scope}.#{@caption}", **{ scope: :data_tables, default: [:"common.#{@caption}"] }.merge(translation_params))
         end
         @params = {}
         @params[:link_to] = @options.delete(:link_to)
@@ -1127,7 +1117,6 @@ module Devextreme
       def transform_options!
         @options[:css_class] = @options.delete(:class).to_s if @options.has_key?(:class)
       end
-
     end
 
     class ColumnText < Column
@@ -1180,7 +1169,7 @@ module Devextreme
 
       def transform(instance, view_context, text)
         if text.present? && text.respond_to?(:strftime)
-          {:title => text.to_time.iso8601, :datetime => text.getutc.iso8601, :formatted => text.to_time.to_formatted_s(:long) }
+          { :title => text.to_time.iso8601, :datetime => text.getutc.iso8601, :formatted => text.to_time.to_formatted_s(:long) }
         elsif @options[:allow_non_date_values]
           text
         else
@@ -1211,7 +1200,7 @@ module Devextreme
     class ColumnBool < Column
       def initialize(name, t_scope, options = nil, value = nil)
         super name, t_scope, options, value
-        option(self.options.delete(:format){|k| DataTableFormatters.format_bool})
+        option(self.options.delete(:format) { |k| DataTableFormatters.format_bool })
       end
     end
 
@@ -1247,9 +1236,9 @@ module Devextreme
 
       def extra_link_formatting(instance, view_context, text)
         if link_to?
-          text = {:href => @params[:link_to].call(instance,view_context), :text => view_context.format_number(text, :precision => @options[:precision]), :value => text}
+          text = { :href => @params[:link_to].call(instance, view_context), :text => view_context.format_number(text, :precision => @options[:precision]), :value => text }
         elsif link_to_content?
-          text = {:content => @params[:link_to_content].call(instance,view_context), :text => view_context.format_number(text, :precision => @options[:precision]), :value => text}
+          text = { :content => @params[:link_to_content].call(instance, view_context), :text => view_context.format_number(text, :precision => @options[:precision]), :value => text }
         else
           text
         end
@@ -1337,6 +1326,7 @@ module Devextreme
 
     class ColumnIcon < Column
       attr_reader :image, :on_click_fn, :link, :tooltip
+
       def initialize(name, t_scope, image, options = nil, value = nil)
         super name, t_scope, options, value
         @image = image
@@ -1356,9 +1346,9 @@ module Devextreme
         title ||= tooltip || name
         title = I18n.t(title, :scope => :tooltips) if title.is_a?(Symbol)
         {
-          :image  => view_context.icon_class(image).join(' '),
-          :title  => title,
-          :on_click => click,
+          :image        => view_context.icon_class(image).join(' '),
+          :title        => title,
+          :on_click     => click,
           :data_options => {
             :href => link.respond_to?(:call) ? link.call(instance, view_context) : link
           }
@@ -1368,9 +1358,10 @@ module Devextreme
 
     class ColumnEnum < Column
       def initialize(name, t_scope, enum_module, options = nil)
-        enum_helper = -> { enum_module.list_for_select.map do |enum|
-          "SELECT '#{enum[0]}' AS name, #{enum[1]} AS id"
-        end.join(' UNION ')
+        enum_helper = -> {
+          enum_module.list_for_select.map do |enum|
+            "SELECT '#{enum[0]}' AS name, #{enum[1]} AS id"
+          end.join(' UNION ')
         }
 
         @sorter = enum_helper
@@ -1391,13 +1382,12 @@ module Devextreme
       def transform(instance, view_context, text)
         {
           :text  => text,
-          :label  => @label_lambda.call(instance)
+          :label => @label_lambda.call(instance)
         }
       end
     end
 
     class ColumnBuilder
-
       attr_accessor :columns
 
       def initialize(t_scope)
@@ -1492,11 +1482,9 @@ module Devextreme
 
         @columns << ColumnAsOf.new(name, @t_scope, options, value)
       end
-
     end
 
     class Summary < Column
-
       attr_reader :type
 
       def initialize(name, t_scope, table_name, options = nil, value = nil)
@@ -1577,7 +1565,6 @@ module Devextreme
     end
 
     class SummaryBuilder < ColumnBuilder
-
       attr_accessor :summaries
 
       def initialize(t_scope, table_name)
@@ -1621,6 +1608,5 @@ module Devextreme
         @summaries << SummaryCustom.new(name, column, @t_scope, @table_name, options, value)
       end
     end
-
   end
 end

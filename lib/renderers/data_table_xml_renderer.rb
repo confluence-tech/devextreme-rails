@@ -10,13 +10,12 @@ module Devextreme
 
     send_data(
       model,
-      :type => :xml,
+      :type        => :xml,
       :disposition => "attachment; filename=#{filename}.xml"
     )
   end
 
   class DataTableXmlGenerator
-
     def initialize(instance, options = {})
       @instance = instance
       @options = options
@@ -35,6 +34,5 @@ module Devextreme
     def append_xml(iterator_method)
       # nop
     end
-
   end
 end

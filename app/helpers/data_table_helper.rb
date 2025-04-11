@@ -46,7 +46,7 @@ module DataTableHelper
       ,
        onSelectionChanged: function (selecteditems) {
          if (selecteditems.selectedRowKeys.length <= 0) return;
-         
+      #{'   '}
          #{selection_changed.present? ? "#{selection_changed}(selecteditems)" : ''}
 
          if (#{preserve_selected_rows})
@@ -70,24 +70,24 @@ module DataTableHelper
     columns_json << hash_to_json(data_table.action_column) unless data_table.actions.blank?
 
     columns_json.concat(data_table.columns.map do |column|
-      col_data = [
-        "dataField: \"#{data_table.base_query.table_name}.#{begin
-          column.name.join('.')
-        rescue StandardError
-          column.name.to_s
-        end}\"",
-        "dataFieldWithoutTable: \"#{column.name}\"",
-        "dataFieldExtraValue: \"#{column.extra_value}\"",
-        "caption: \"#{column.caption}\"",
-        'allowHiding: true'
-      ]
+                          col_data = [
+                            "dataField: \"#{data_table.base_query.table_name}.#{begin
+                              column.name.join('.')
+                            rescue StandardError
+                              column.name.to_s
+                            end}\"",
+                            "dataFieldWithoutTable: \"#{column.name}\"",
+                            "dataFieldExtraValue: \"#{column.extra_value}\"",
+                            "caption: \"#{column.caption}\"",
+                            'allowHiding: true'
+                          ]
 
-      col_data << header_filter(column, data_table)
+                          col_data << header_filter(column, data_table)
 
-      col_format = hash_to_json(column.options)
-      col_data << col_format unless col_format.blank?
-      col_data.flatten.compact.join(',')
-    end)
+                          col_format = hash_to_json(column.options)
+                          col_data << col_format unless col_format.blank?
+                          col_data.flatten.compact.join(',')
+                        end)
 
     columns_json = columns_json.map { |c| "{#{c}}" }.join(',')
 
@@ -130,33 +130,33 @@ module DataTableHelper
     render(
       partial: 'data_tables/data_table',
       locals: {
-        :data_table => data_table,
-        :container_id => container_id,
-        :functions => functions,
-        :height => height,
-        :width => width,
-        :options_json => options_json,
-        :columns_json => columns_json,
-        :compact_view_json => compact_view_json,
-        :summaries_json => summaries_json,
-        :custom_summary_functions => custom_summary_functions,
-        :filter_builder_visible => filter_builder_visible,
-        :group_panel_visible => group_panel_visible,
-        :column_picker_visible => column_picker_visible,
-        :download_visible => download_visible,
-        :csv_download_visible => csv_download_visible,
-        :xls_download_visible => xls_download_visible,
-        :reset_layout_visible => reset_layout_visible,
-        :converted_load_options => url_params.to_json,
-        :bulk_actions_visible => bulk_actions_visible,
-        :disable_state_storing => disable_state_storing,
-        :filter_form_id => filter_form_id,
-        :requireTotalRowCountIndicator => require_total_row_count_indicator,
-        :options => options,
-        :data_options_json => data_options_json,
-        :state_storing_json => state_storing_json,
+        :data_table                     => data_table,
+        :container_id                   => container_id,
+        :functions                      => functions,
+        :height                         => height,
+        :width                          => width,
+        :options_json                   => options_json,
+        :columns_json                   => columns_json,
+        :compact_view_json              => compact_view_json,
+        :summaries_json                 => summaries_json,
+        :custom_summary_functions       => custom_summary_functions,
+        :filter_builder_visible         => filter_builder_visible,
+        :group_panel_visible            => group_panel_visible,
+        :column_picker_visible          => column_picker_visible,
+        :download_visible               => download_visible,
+        :csv_download_visible           => csv_download_visible,
+        :xls_download_visible           => xls_download_visible,
+        :reset_layout_visible           => reset_layout_visible,
+        :converted_load_options         => url_params.to_json,
+        :bulk_actions_visible           => bulk_actions_visible,
+        :disable_state_storing          => disable_state_storing,
+        :filter_form_id                 => filter_form_id,
+        :requireTotalRowCountIndicator  => require_total_row_count_indicator,
+        :options                        => options,
+        :data_options_json              => data_options_json,
+        :state_storing_json             => state_storing_json,
         :internal_master_detail_options => internal_master_detail_options,
-        :preserve_selected_rows => preserve_selected_rows
+        :preserve_selected_rows         => preserve_selected_rows
       }
     )
   end

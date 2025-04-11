@@ -1,5 +1,4 @@
 module LayoutHelper
-
   def title(title)
     content_for(:title) { (content_for?(:title) ? ' ' : '') + h(title.to_s) }
   end
@@ -24,5 +23,4 @@ module LayoutHelper
   def other_body_content(&block)
     content_for(:other_body_content, &block)
   end
-
 end

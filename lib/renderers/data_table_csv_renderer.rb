@@ -15,12 +15,12 @@ module Devextreme
 
     new_params = params.merge(
       'filterOptions' => options.dig(:columns_layout, 'filterOptions'),
-      'sortOptions' => options.dig(:columns_layout, 'sortOptions')
+      'sortOptions'   => options.dig(:columns_layout, 'sortOptions')
     )
 
     send_data(
       model.to_csv(view_context, new_params, options),
-      :type => mime_type,
+      :type        => mime_type,
       :disposition => "attachment; filename=#{filename}.#{extension}"
     )
   end
