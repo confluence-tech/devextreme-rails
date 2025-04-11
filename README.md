@@ -29,7 +29,7 @@ _application.js_
 
     //= require 'devextreme'
 
-### Webpacker
+### Webpacker/Shakapacker
 
 Ensure you have the following:  
 _.npmrc_
@@ -44,6 +44,19 @@ Then execute
 _application.js_
 
     import 'devextreme'
+
+To get Globalize working, merge the webpack config with the default webpacker config:  
+_environment.js_/_base.js_
+
+    const devexConfig = require('@statpro/devextreme-rails/app/src/webpack/config.js');
+
+    const preOut = mergeWithCustomize({
+      customizeArray: customizeArray({
+        'module.rules': 'prepend',
+        'plugins': 'prepend',
+      }),
+    })(webpackConfig, devexConfig);
+    
 
 ## Usage
 
