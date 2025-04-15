@@ -158,7 +158,7 @@ window.column_template_linkto = function(container, options){
       var value = options.value.value;
 
       if (!isNaN(value)) {
-        text = Globalize.formatNumber(parseFloat(value), {minimumFractionDigits: options.column.format.precision, maximumFractionDigits: options.column.format.precision});
+        text = DevExpress.localization.formatNumber(parseFloat(value), options.column.format);
       }
     }
 
@@ -195,7 +195,7 @@ window.column_template_linkto_content = function(container, options){
       var value = options.value.value;
 
       if (!isNaN(value)) {
-        text = Globalize.formatNumber(parseFloat(value), {minimumFractionDigits: options.column.format.precision, maximumFractionDigits: options.column.format.precision});
+        text = DevExpress.localization.formatNumber(parseFloat(value), options.column.format);
 
         // 3 == Text
         // see https://www.w3schools.com/jsref/prop_node_nodetype.asp
