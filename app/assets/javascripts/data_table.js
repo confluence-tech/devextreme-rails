@@ -7,11 +7,11 @@
  */
  window.ItemResize = function(dataGrid, height, width) {
   if (!(height || width)){
-    var screenHeight = $('.navbar-fixed-bottom').offset().top - $('#' + dataGrid.attr('id') + '-holder').offset().top;
-    var footerHeight = $('footer').height();
+    const screenHeight = $('.navbar-fixed-bottom').offset().top - $(`#${dataGrid.attr('id')}-holder`).offset().top;
+    const footerHeight = $('footer').height();
     dataGrid.height( screenHeight - footerHeight );
   } else {
-    var dgMargin = dataGrid.outerHeight(true)-dataGrid.outerHeight();
+    const dgMargin = dataGrid.outerHeight(true)-dataGrid.outerHeight();
     // Sets the height in its orignal value E.g 50%, 50vh, 500px
     dataGrid.height(height);
     // Gets the height in pixels then subtracts the dgMargin
@@ -30,14 +30,14 @@ window.getDataGrid = function(container_id) {
 }
 
 window.getSelectedRowKeys = function(container_id) {
-  var dataGrid = getDataGrid(container_id);
+  const dataGrid = window.getDataGrid(container_id);
   return dataGrid.getSelectedRowKeys();
 }
 
 window.getSelectedRowsAsParams = function(container_id, filter_form_id) {
-  var keys = getSelectedRowKeys("#" + container_id);
+  const keys = window.getSelectedRowKeys(`#${container_id}`);
 
-  var params = {};
+  let params = {};
 
   if (keys.length > 0) {
     params = {
@@ -52,8 +52,8 @@ window.getSelectedRowsAsParams = function(container_id, filter_form_id) {
     }
     // FIXME: this isn't a specific enough jQuery selector when filter_form_id == "form"
     //   since if there is more than one form, it will include them all
-    var search_params = $("" + filter_form_id  + ".auto-submit").serializeArray();
-    var data = {
+    const search_params = $(`${filter_form_id}.auto-submit`).serializeArray();
+    const data = {
       name: 'container_id',
       value: container_id
     };
@@ -65,16 +65,16 @@ window.getSelectedRowsAsParams = function(container_id, filter_form_id) {
 }
 
 window.submit_bulk_action = function(caller, container_id, fn_callback, confirm_message_selector) {
-  var $caller = $(caller);
-  var dataGrid = getDataGrid('#' + container_id);
-  var keys = dataGrid.getSelectedRowKeys();
-  var value_count = keys.length > 0 ? keys.length : dataGrid.totalCount();
+  const $caller = $(caller);
+  const dataGrid = window.getDataGrid(`#${container_id}`);
+  const keys = dataGrid.getSelectedRowKeys();
+  const value_count = keys.length > 0 ? keys.length : dataGrid.totalCount();
 
   if (fn_callback) {
     fn_callback(keys);
   }
 
-  var confirmation_message = $caller.data('confirmMessage').replace('{0}', value_count);
+  const confirmation_message = $caller.data('confirmMessage').replace('{0}', value_count);
   if (confirm_message_selector) {
     $(confirm_message_selector).text(confirmation_message);
   }
@@ -84,18 +84,18 @@ window.submit_bulk_action = function(caller, container_id, fn_callback, confirm_
 }
 
 window.show_column_chooser = function(container_id) {
-  var dataGrid = getDataGrid('#' + getSelectedContainerId(container_id));
+  const dataGrid = window.getDataGrid(`#${window.getSelectedContainerId(container_id)}`);
   dataGrid && dataGrid.showColumnChooser();
 }
 
 window.refresh_grid = function(container_id) {
-  var dataGrid = getDataGrid('#' + getSelectedContainerId(container_id));
+  const dataGrid = window.getDataGrid(`#${window.getSelectedContainerId(container_id)}`);
   dataGrid && dataGrid.refresh();
 }
 
 window.initiate_grid_reset = function(container_id) {
-  container_id = getSelectedContainerId(container_id);
-  var $dataGrid = $('#' + container_id);
+  container_id = window.getSelectedContainerId(container_id);
+  const $dataGrid = $(`#${container_id}`);
 
   if ($dataGrid.length === 0) return;
 
@@ -119,7 +119,7 @@ window.initiate_grid_reset = function(container_id) {
 }
 
 window.getSelectedContainerId = function(default_container_id) {
-  var is_master_detail = JSON.parse($('#is_master_detail').val().toLowerCase());
+  const is_master_detail = JSON.parse($('#is_master_detail').val().toLowerCase());
   return (is_master_detail === true) ? $('#selected_container_id').val() : default_container_id;
 }
 
@@ -132,8 +132,7 @@ window.hide_download_modal = function(event, container_id) {
   event.preventDefault();
 
   // Hide the modal
-  var modal_selector = '#' + container_id + '-download_modal';
-  $(modal_selector).modal('hide');
+  $(`#${container_id}-download_modal`).modal('hide');
 
   // Run the callback if it exists
   if (typeof hide_download_modal_callback == 'function') {
@@ -142,9 +141,8 @@ window.hide_download_modal = function(event, container_id) {
 }
 
 window.show_download_modal = function(container_id) {
-  container_id = getSelectedContainerId(container_id);
+  container_id = window.getSelectedContainerId(container_id);
 
   // Show the modal
-  var modal_selector = '#' + container_id + '-download_modal';
-  $(modal_selector).modal('show');
+  $(`#${container_id}-download_modal`).modal('show');
 }

@@ -46,7 +46,7 @@ module DataTableHelper
       ,
        onSelectionChanged: function (selecteditems) {
          if (selecteditems.selectedRowKeys.length <= 0) return;
-      #{'   '}
+
          #{selection_changed.present? ? "#{selection_changed}(selecteditems)" : ''}
 
          if (#{preserve_selected_rows})
@@ -69,25 +69,27 @@ module DataTableHelper
 
     columns_json << hash_to_json(data_table.action_column) unless data_table.actions.blank?
 
-    columns_json.concat(data_table.columns.map do |column|
-                          col_data = [
-                            "dataField: \"#{data_table.base_query.table_name}.#{begin
-                              column.name.join('.')
-                            rescue StandardError
-                              column.name.to_s
-                            end}\"",
-                            "dataFieldWithoutTable: \"#{column.name}\"",
-                            "dataFieldExtraValue: \"#{column.extra_value}\"",
-                            "caption: \"#{column.caption}\"",
-                            'allowHiding: true'
-                          ]
+    columns_json.concat(
+      data_table.columns.map do |column|
+        col_data = [
+          "dataField: \"#{data_table.base_query.table_name}.#{begin
+            column.name.join('.')
+          rescue StandardError
+            column.name.to_s
+          end}\"",
+          "dataFieldWithoutTable: \"#{column.name}\"",
+          "dataFieldExtraValue: \"#{column.extra_value}\"",
+          "caption: \"#{column.caption}\"",
+          'allowHiding: true'
+        ]
 
-                          col_data << header_filter(column, data_table)
+        col_data << header_filter(column, data_table)
 
-                          col_format = hash_to_json(column.options)
-                          col_data << col_format unless col_format.blank?
-                          col_data.flatten.compact.join(',')
-                        end)
+        col_format = hash_to_json(column.options)
+        col_data << col_format unless col_format.blank?
+        col_data.flatten.compact.join(',')
+      end
+    )
 
     columns_json = columns_json.map { |c| "{#{c}}" }.join(',')
 

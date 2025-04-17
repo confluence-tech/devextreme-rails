@@ -1,13 +1,13 @@
 $.fn.extend({
   animateCss: function (animationName) {
-    var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-    $(this).addClass('animated ' + animationName).one(animationEnd, function() {
-      $(this).removeClass('animated ' + animationName);
+    const animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+    $(this).addClass(`animated ${animationName}`).one(animationEnd, function() {
+      $(this).removeClass(`animated ${animationName}`);
     });
   }
 });
 
-$('.grow').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function() {
+$('.grow').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', () => {
   $thisGridL1.dxDataGrid({
     width: $level1.width()
   });
@@ -53,29 +53,29 @@ window.show_level_3 = function(data_to_show, level_3_grid_id) {
   reset_grid('#level_2_grid', 'level_3');
   level_back('level_2');
 
-  $thisGridL3 = $('#' + level_3_grid_id);
+  $thisGridL3 = $(`#${level_3_grid_id}`);
   if ($thisGridL3.length > 0) {
-    reset_grid('#' + level_3_grid_id, 'level_3');
+    reset_grid(`#${level_3_grid_id}`, 'level_3');
   }
 }
 
 function unhide_back_button(event) {
-  $('[data-md-level="#' + event.currentTarget.id + '"]').removeClass('hidden').animateCss('fadeIn');
+  $(`[data-md-level="#${event.currentTarget.id}"]`).removeClass('hidden').animateCss('fadeIn');
 }
 
 function hide_back_button(event) {
-  $('[data-md-level="#' + event.currentTarget.id + '"]').addClass('hidden');
+  $(`[data-md-level="#${event.currentTarget.id}"]`).addClass('hidden');
 }
 
 function level_back(level_id) {
-  var $lvlSel = $('#' + level_id);
+  const $lvlSel = $(`#${level_id}`);
 
   $lvlSel.on('mouseenter', unhide_back_button);
   $lvlSel.on('mouseleave', hide_back_button);
 }
 
 function remove_level_back(level_id) {
-  var $lvlSel = $('#' + level_id);
+  const $lvlSel = $(`#${level_id}`);
 
   $lvlSel.off('mouseenter', unhide_back_button);
   $lvlSel.off('mouseleave', hide_back_button);
@@ -83,15 +83,15 @@ function remove_level_back(level_id) {
 
 function clickBack(btn, level) {
 
-  $('body').on('click', btn, function() {
+  $('body').on('click', btn, () => {
     level();
     $('.dx-md-return').addClass('hidden');
   });
 }
 
 function reset_grid(selector, level, factory_reset = false){
-  var $grid = $(selector);
-  var dataGrid;
+  const $grid = $(selector);
+  let dataGrid;
 
   /**
    * This setting is used to bypass setting the grid back to the default state when reset_grid is called without a compact view.
@@ -99,7 +99,7 @@ function reset_grid(selector, level, factory_reset = false){
    * Note: this is only applicable when we do not have a compact view defined for the grid as the compact view columns
    *       will no longer resize themselves nicely.
    **/
-  var apply_default_state_on_reset = $grid.data("internal_master_detail-apply_default_state_on_reset") ?? true;
+  const apply_default_state_on_reset = $grid.data("internal_master_detail-apply_default_state_on_reset") ?? true;
 
   /**
    * This setting is to disable repainting of the grid and updating dimensions when reset_grid is called.
@@ -109,7 +109,7 @@ function reset_grid(selector, level, factory_reset = false){
    * Note: this is only applicable when we do not have a compact view defined for the grid as the compact view columns
    *       will no longer resize themselves nicely.
    **/
-  var disable_repaint = $grid.data("internal_master_detail-disable_repaint") ?? false;
+  const disable_repaint = $grid.data("internal_master_detail-disable_repaint") ?? false;
 
   try {
     if ($grid.data("compact-view") && ($grid.data("compact-view")[level] || []).length > 0) {
@@ -132,7 +132,7 @@ function reset_grid(selector, level, factory_reset = false){
   finally {
     if (disable_repaint) return;
 
-    window.setTimeout(function () {
+    window.setTimeout(() => {
       // If someone is clicking fast on different rows, the grid may not be on the dom anymore.
       // We don't want to repaint the grid if it isn't there. Plus, it will fail if it isn't there.
       if ($(selector).length > 0) {
@@ -158,11 +158,9 @@ window.initMasterDetail = function() {
   clickBack('.btn-return-l1', show_level_1);
   clickBack('.btn-return-l2', show_level_2);
 
-  $('body').on('click', '.btn-return-l1', function () {
-    reset_grid('#level_1_grid', 'level_1', true)
-  });
+  $('body').on('click', '.btn-return-l1', () => { reset_grid('#level_1_grid', 'level_1', true); });
 
-  this.showErrorDialog = function() {
+  this.showErrorDialog = () => {
     $('#dialog_error').modal('hide');
     return false;
   };
