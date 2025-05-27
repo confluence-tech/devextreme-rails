@@ -1099,9 +1099,9 @@ module Devextreme
         unless @caption.is_a?(String)
           translation_params = @options.delete(:translation_params) || {}
           @caption = @name.first if @name.is_a? Array
-          default_caption = I18n.translate(@caption, **{:scope => [:data_tables, :common] }, :default => nil)
+          default_caption = I18n.translate(@caption, **{ :scope => [:data_tables, :common] }, :default => nil)
           default_caption ||= :none
-          @caption = I18n.translate(@caption, **{:scope => [:data_tables, @t_scope], :default => default_caption}.merge(translation_params))
+          @caption = I18n.translate(@caption, **{ :scope => [:data_tables, @t_scope], :default => default_caption }.merge(translation_params))
         end
         @params = {}
         @params[:link_to] = @options.delete(:link_to)
