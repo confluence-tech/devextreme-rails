@@ -617,7 +617,7 @@ function handlePrecisionUpdate(e){
 
   if (!isNaN(new_precision) && new_precision >= min_precision && new_precision <= max_precision) {
     grid.columnOption(e.data.columnDataField, 'format.precision', new_precision);
-
+    grid.option("stateStoring.customSave")(grid.state());
     // This is a hack for the context menu not to close when your input value is invalid
     // See /app/views/data_tables/_data_table.html.haml:209
     $('#precisionButton').attr('type', 'button');
