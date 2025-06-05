@@ -9,16 +9,17 @@
   },
   "name": "@statpro/devextreme-rails",
   "description": "assets used for the devextreme-rails gem",
-  "repository": "https://github.com/statpro/devextreme-rails.git",
+  "repository": { "type": "git", "url": "https://github.com/statpro/devextreme-rails.git" },
+  "homepage": "https://github.com/statpro/devextreme-rails",
   "main": "app/src/javascripts/devextreme.js",
   "style": "app/src/stylesheets/devextreme.scss",
   "files": [
-    "app/src",
-    "app/assets/"
+    "app/src/",
+    "app/assets/javascripts/",
+    "app/assets/stylesheets/"
   ],
   "dependencies": {
     "devextreme-dist": "24.2.3",
-    "globalize": "1.7.0",
     "jquery": "^3.7.1"
   }
 }
