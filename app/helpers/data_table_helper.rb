@@ -45,8 +45,6 @@ module DataTableHelper
     functions += <<-JS
       ,
        onSelectionChanged: function (selecteditems) {
-         if (selecteditems.selectedRowKeys.length <= 0) return;
-
          #{selection_changed.present? ? "#{selection_changed}(selecteditems)" : ''}
 
          if (#{preserve_selected_rows})
