@@ -35,11 +35,11 @@ Ensure you have the following:
 _.npmrc_
 
     //npm.pkg.github.com/:_authToken=<Github Personal Access Token with packages:read scope>
-    @statpro:registry=https://npm.pkg.github.com/
+    @confluence-tech:registry=https://npm.pkg.github.com/
 
 Then execute
 
-    $ yarn add @statpro/devextreme-rails
+    $ yarn add @confluence-tech/devextreme-rails
 
 _application.js_
 
@@ -48,7 +48,7 @@ _application.js_
 To get Globalize working, merge the webpack config with the default webpacker config:  
 _environment.js_/_base.js_
 
-    const devexConfig = require('@statpro/devextreme-rails/app/src/webpack/config.js');
+    const devexConfig = require('@confluence-tech/devextreme-rails/app/src/webpack/config.js');
 
     const preOut = mergeWithCustomize({
       customizeArray: customizeArray({

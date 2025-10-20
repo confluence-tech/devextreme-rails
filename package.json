@@ -7,10 +7,10 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   },
-  "name": "@statpro/devextreme-rails",
+  "name": "@confluence-tech/devextreme-rails",
   "description": "assets used for the devextreme-rails gem",
-  "repository": { "type": "git", "url": "https://github.com/statpro/devextreme-rails.git" },
-  "homepage": "https://github.com/statpro/devextreme-rails",
+  "repository": { "type": "git", "url": "https://github.com/confluence-tech/devextreme-rails.git" },
+  "homepage": "https://github.com/confluence-tech/devextreme-rails",
   "main": "app/src/javascripts/devextreme.js",
   "style": "app/src/stylesheets/devextreme.scss",
   "files": [

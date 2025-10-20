@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Write a short summary, because RubyGems requires one.}
   spec.description   = %q{Write a longer description or delete this line.}
-  spec.homepage      = "https://github.com/statpro/devextreme-rails"
+  spec.homepage      = "https://github.com/confluence-tech/devextreme-rails"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -20,8 +20,8 @@ Gem::Specification.new do |spec|
     spec.metadata["allowed_push_host"] = "'http://mygemserver.com'"
 
     spec.metadata["homepage_uri"] = spec.homepage
-    spec.metadata["source_code_uri"] = "https://github.com/statpro/devextreme-rails"
-    spec.metadata["changelog_uri"] = "https://github.com/statpro/devextreme-rails/changelog.md"
+    spec.metadata["source_code_uri"] = "https://github.com/confluence-tech/devextreme-rails"
+    spec.metadata["changelog_uri"] = "https://github.com/confluence-tech/devextreme-rails/changelog.md"
   else
     raise "RubyGems 2.0 or newer is required to protect against " \
       "public gem pushes."
