@@ -1,1 +1,1 @@
-inherit_from: https://raw.githubusercontent.com/statpro/statpro-style/master/default_rubocop.yml
+inherit_from: https://raw.githubusercontent.com/confluence-tech/statpro-style/master/default_rubocop.yml

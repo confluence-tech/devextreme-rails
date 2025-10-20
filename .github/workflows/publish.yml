@@ -13,7 +13,7 @@ jobs:
         with:
           node-version: 12.22.12
           registry-url: https://npm.pkg.github.com/
-          scope: '@statpro'
+          scope: '@confluence-tech'
       - run: make publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
