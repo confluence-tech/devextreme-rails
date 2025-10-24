@@ -1,0 +1,116 @@
+{
+  "repositoryUrl": "git@github.com:statpro/percolator.git",
+  "branches": [
+    {
+      "name": "master"
+    }
+  ],
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "releaseRules": [
+          {
+            "type": "refactor",
+            "release": "patch"
+          },
+          {
+            "type": "conf",
+            "release": "patch"
+          },
+          {
+            "type": "build",
+            "scope": "deps",
+            "release": "patch"
+          }
+        ]
+      }
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "conventionalcommits",
+        "presetConfig": {
+          "types": [
+            {
+              "type": "feat",
+              "section": "Features"
+            },
+            {
+              "type": "fix",
+              "section": "Bug Fixes"
+            },
+            {
+              "type": "perf",
+              "section": "Performance Improvements"
+            },
+            {
+              "type": "revert",
+              "section": "Reverts"
+            },
+            {
+              "type": "conf",
+              "section": "Configuration",
+              "hidden": false
+            },
+            {
+              "type": "refactor",
+              "section": "Refactoring",
+              "hidden": false
+            },
+            {
+              "type": "build",
+              "section": "Dependencies and Other Build Updates",
+              "hidden": false
+            },
+            {
+              "type": "chore",
+              "hidden": true
+            },
+            {
+              "type": "docs",
+              "hidden": true
+            },
+            {
+              "type": "style",
+              "hidden": true
+            },
+            {
+              "type": "test",
+              "hidden": true
+            }
+          ]
+        }
+      }
+    ],
+    [
+      "@semantic-release/changelog",
+      {
+        "changelogFile": "docs/CHANGELOG.md"
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "docs/CHANGELOG.md"
+        ],
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          "docs/CHANGELOG.md"
+        ]
+      }
+    ],
+    [
+      "@semantic-release/exec",
+      {
+        "publishCmd": "make publish VERSION=${nextRelease.version}"
+      }
+    ]
+  ]
+}

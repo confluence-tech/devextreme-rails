@@ -76,7 +76,7 @@ module Devextreme
         csv_rows << row
       end
 
-      csv_string = CSV.generate(:headers => false) do |csv|
+      csv_string = CSV.generate(:headers => false, quote_char: '', :encoding => Encoding.find("UTF-8")) do |csv|
         csv_rows.each do |row|
           csv << row
         end
