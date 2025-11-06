@@ -1,4 +1,19 @@
 //ensures button dropdown displays over column
 .dx-datagrid .dx-datagrid-sticky-column-left{
     position: inherit;
-}  
+}
+//removes extra padding in free space row to stop the grid lines showing
+.dx-freespace-row > td {
+  padding: 0 !important;
+  height: 0 !important;
+  min-height: 0 !important;
+}
+//hides the expander icon stub in the column chooser
+.dx-treeview .dx-treeview-node .dx-treeview-expander-icon-stub {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}

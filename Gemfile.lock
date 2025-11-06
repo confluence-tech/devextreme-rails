@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    devextreme-rails (24.2.3.pre.2.2)
+    devextreme-rails (24.2.3.pre.2.3)
 
 GEM
   remote: https://rubygems.org/
@@ -26,10 +26,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 2.3.0)
+  bundler (~> 2.4.0)
   devextreme-rails!
   rake (~> 13.0)
   rspec (~> 3.0)
 
 BUNDLED WITH
-   2.3.0
+   2.4.4
